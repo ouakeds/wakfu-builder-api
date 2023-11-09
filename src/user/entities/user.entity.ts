@@ -5,7 +5,7 @@ import { Column, CreateDateColumn, PrimaryGeneratedColumn } from 'typeorm';
 export class User {
   @Field()
   @PrimaryGeneratedColumn('uuid')
-  id: string;
+  id: number;
 
   @Field()
   @Column({ length: 500, nullable: false })
