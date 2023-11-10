@@ -5,9 +5,7 @@ import { AppController } from './app.controller';
 import { UserModule } from './user/user.module';
 import { AuthModule } from './auth/auth.module';
 import { APP_GUARD } from '@nestjs/core';
-import { AuthGuard } from './auth/auth.guard';
-// import { GraphQLModule } from '@nestjs/graphql';
-// import { ApolloDriver, ApolloDriverConfig } from '@nestjs/apollo';
+import { JwtAuthGuard } from './auth/guard/jwt-auth.guard';
 
 @Module({
   imports: [
@@ -26,11 +24,6 @@ import { AuthGuard } from './auth/auth.guard';
       }),
       inject: [ConfigService],
     }),
-    // GraphQLModule.forRoot<ApolloDriverConfig>({
-    //   driver: ApolloDriver,
-    //   typePaths: ['./**/*.graphql'],
-    //   autoSchemaFile: 'schema.gql',
-    // }),
     UserModule,
     AuthModule,
   ],
@@ -38,7 +31,7 @@ import { AuthGuard } from './auth/auth.guard';
   providers: [
     {
       provide: APP_GUARD,
-      useClass: AuthGuard,
+      useClass: JwtAuthGuard,
     },
   ],
 })
