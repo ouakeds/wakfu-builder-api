@@ -1,8 +1,10 @@
 import { ObjectType } from '@nestjs/graphql';
+import { Build } from 'src/build/entities/build.entity';
 import {
   Column,
   CreateDateColumn,
   Entity,
+  OneToMany,
   PrimaryGeneratedColumn,
 } from 'typeorm';
 
@@ -20,6 +22,9 @@ export class User {
 
   @Column('text', { nullable: false })
   email: string;
+
+  @OneToMany(() => Build, (build) => build.author)
+  builds: Build[];
 
   @Column()
   @CreateDateColumn()
