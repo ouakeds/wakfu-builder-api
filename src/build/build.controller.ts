@@ -6,19 +6,23 @@ import {
   Patch,
   Param,
   Delete,
+  Request,
 } from '@nestjs/common';
 import { BuildService } from './build.service';
 import { CreateBuildDto } from './dto/create-build.dto';
-import { UpdateBuildDto } from './dto/update-build.dto';
 import { Public } from 'src/auth/decorator/public.decorator';
+import { UserService } from 'src/user/user.service';
 
 @Controller('builds')
 export class BuildController {
-  constructor(private readonly buildService: BuildService) {}
+  constructor(
+    private readonly buildService: BuildService,
+    private readonly userService: UserService,
+  ) {}
 
   @Post()
-  create(@Body() createBuildDto: CreateBuildDto) {
-    // bind author current user logged
+  async create(@Request() req, @Body() createBuildDto: CreateBuildDto) {
+    createBuildDto.author = await this.userService.findByEmail(req.user.email);
     return this.buildService.create(createBuildDto);
   }
 
@@ -34,10 +38,10 @@ export class BuildController {
     return this.buildService.findOne(+id);
   }
 
-  @Patch(':id')
-  update(@Param('id') id: string, @Body() updateBuildDto: UpdateBuildDto) {
-    return this.buildService.update(+id, updateBuildDto);
-  }
+  // @Patch(':id')
+  // update(@Param('id') id: string, @Body() updateBuildDto: UpdateBuildDto) {
+  //   return this.buildService.update(+id, updateBuildDto);
+  // }
 
   @Public()
   @Delete(':id')

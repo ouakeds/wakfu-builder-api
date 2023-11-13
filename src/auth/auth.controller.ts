@@ -31,7 +31,7 @@ export class AuthController {
   @UseGuards(JwtAuthGuard)
   @Get('profile')
   getProfile(@Request() req) {
-    return req.user;
+    return this.userService.findByEmail(req.user.email);
   }
 
   @Public()

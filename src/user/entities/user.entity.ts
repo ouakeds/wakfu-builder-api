@@ -7,6 +7,8 @@ import {
   OneToMany,
   PrimaryGeneratedColumn,
 } from 'typeorm';
+import { Exclude } from 'class-transformer';
+import * as bcrypt from 'bcrypt';
 
 @ObjectType()
 @Entity('user')
@@ -17,6 +19,7 @@ export class User {
   @Column({ length: 500, nullable: false })
   username: string;
 
+  @Exclude()
   @Column({ length: 500, nullable: false })
   password: string;
 
@@ -29,4 +32,20 @@ export class User {
   @Column()
   @CreateDateColumn()
   created_at: Date;
+
+  toJSON() {
+    return {
+      ...this,
+      password: undefined,
+    };
+  }
+
+  async validatePassword(password: string) {
+    if (!this.password) {
+      return false;
+    }
+
+    const isValidPassword = await bcrypt.compare(password, this.password);
+    return isValidPassword;
+  }
 }

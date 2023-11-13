@@ -1,5 +1,6 @@
 import { IsBoolean, IsNumber, IsString } from 'class-validator';
 import { Cost } from '../entities/build.entity';
+import { User } from 'src/user/entities/user.entity';
 
 export class CreateBuildDto {
   @IsString()
@@ -7,9 +8,6 @@ export class CreateBuildDto {
 
   @IsString()
   job: string;
-
-  @IsString()
-  author: string;
 
   @IsNumber()
   startLevel: number;
@@ -22,4 +20,6 @@ export class CreateBuildDto {
 
   @IsBoolean()
   pve: boolean;
+
+  author?: User;
 }
