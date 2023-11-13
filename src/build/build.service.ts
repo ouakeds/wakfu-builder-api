@@ -16,7 +16,7 @@ export class BuildService {
     return this.buildRepository.find();
   }
 
-  async findOne(id: number): Promise<Build> {
+  async findOne(id: string): Promise<Build> {
     return this.buildRepository.findOne({ where: { id } });
   }
 
@@ -25,12 +25,12 @@ export class BuildService {
     return this.buildRepository.save(newBuild);
   }
 
-  async update(id: number, Build: Partial<Build>): Promise<Build> {
+  async update(id: string, Build: Partial<Build>): Promise<Build> {
     await this.buildRepository.update(id, Build);
     return this.buildRepository.findOne({ where: { id } });
   }
 
-  async remove(id: number): Promise<void> {
+  async remove(id: string): Promise<void> {
     await this.buildRepository.delete(id);
   }
 }

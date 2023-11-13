@@ -3,7 +3,6 @@ import {
   Get,
   Post,
   Body,
-  Patch,
   Param,
   Delete,
   Request,
@@ -35,7 +34,7 @@ export class BuildController {
   @Public()
   @Get(':id')
   findOne(@Param('id') id: string) {
-    return this.buildService.findOne(+id);
+    return this.buildService.findOne(id);
   }
 
   // @Patch(':id')
@@ -46,6 +45,6 @@ export class BuildController {
   @Public()
   @Delete(':id')
   remove(@Param('id') id: string) {
-    return this.buildService.remove(+id);
+    return this.buildService.remove(id);
   }
 }

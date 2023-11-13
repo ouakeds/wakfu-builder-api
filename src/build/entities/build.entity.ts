@@ -14,7 +14,7 @@ export type Cost = 'low cost' | 'average' | 'expensive' | 'very expensive';
 @Entity('build')
 export class Build {
   @PrimaryGeneratedColumn('uuid')
-  id: number;
+  id: string;
 
   @Column({ length: 50, nullable: false })
   name: string;
