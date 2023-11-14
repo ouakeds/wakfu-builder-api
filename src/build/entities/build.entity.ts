@@ -20,7 +20,7 @@ export class Build {
   name: string;
 
   @Column({ length: 20, nullable: false })
-  job: string; // add enum
+  job: string;
 
   @Column()
   pve: boolean;
