@@ -7,6 +7,7 @@ import { AuthModule } from './auth/auth.module';
 import { APP_GUARD } from '@nestjs/core';
 import { JwtAuthGuard } from './auth/guard/jwt-auth.guard';
 import { BuildModule } from './build/build.module';
+import { ApiModule } from './api/api.module';
 
 @Module({
   imports: [
@@ -28,6 +29,7 @@ import { BuildModule } from './build/build.module';
     UserModule,
     AuthModule,
     BuildModule,
+    ApiModule,
   ],
   controllers: [AppController],
   providers: [
